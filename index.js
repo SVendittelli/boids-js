@@ -1,27 +1,32 @@
-import * as THREE from 'three';
+import Renderer from "./Renderer.js";
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x1a1b26);
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+class Boids {
+  constructor() {
+    this.renderer = new Renderer();
+  }
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+  init() {
+    // Initialize the renderer.
+    this.renderer.init();
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x73daca });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+    // Start the animation loop.
+    requestAnimationFrame(this.animate.bind(this));
+  }
 
-camera.position.z = 5;
+  animate() {
+    // Call the animate function recursively to keep the animation loop going.
+    requestAnimationFrame(this.animate.bind(this));
 
-function animate() {
-  requestAnimationFrame(animate);
+    this.renderer.cube.rotation.x += 0.01;
+    this.renderer.cube.rotation.y += 0.01;
 
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-
-  renderer.render(scene, camera);
+    this.renderer.render();
+  }
 }
 
-animate();
+// Create a new instance of the Boids class and start the animation loop.
+document.addEventListener("DOMContentLoaded", () => {
+  const boids = new Boids();
+  boids.init();
+});
+
