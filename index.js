@@ -17,9 +17,6 @@ class Boids {
     // Call the animate function recursively to keep the animation loop going.
     requestAnimationFrame(this.animate.bind(this));
 
-    this.renderer.cube.rotation.x += 0.01;
-    this.renderer.cube.rotation.y += 0.01;
-
     this.renderer.render();
   }
 }
