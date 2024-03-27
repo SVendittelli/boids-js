@@ -1,9 +1,11 @@
+import * as THREE from 'three';
+
 import Flock from "./Flock.js";
 import Renderer from "./Renderer.js";
 
 class Boids {
   constructor() {
-    this.flock = new Flock();
+    this.flock = new Flock(new THREE.Vector3(100, 100, 100), 250);
     this.renderer = new Renderer(this.flock)
   }
 

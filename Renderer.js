@@ -24,7 +24,7 @@ export default class Renderer {
   init() {
     this.scene.background = new THREE.Color(0x1a1b26);
 
-    this.camera.position.set(110, 110, 110);
+    this.camera.position.set(this.flock.bounds.x + 5, this.flock.bounds.y + 5, this.flock.bounds.z + 5);
     this.camera.lookAt(0, 0, 0);
 
     this.dummy = new THREE.Object3D();
@@ -39,6 +39,11 @@ export default class Renderer {
     this.mesh = new THREE.InstancedMesh(geometry, material, this.flock.boids.length);
     this.mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     this.scene.add(this.mesh);
+
+    // Draw bounding box
+    const box = new THREE.Box3(new THREE.Vector3(), this.flock.bounds);
+    const boxHelper = new THREE.Box3Helper(box, 0xffffff);
+    this.scene.add(boxHelper);
 
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);

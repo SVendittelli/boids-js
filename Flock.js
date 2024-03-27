@@ -33,7 +33,10 @@ export default class Flock {
    * @param {Boid} boid The boid to add to the flock.
    */
   update() {
-    this.boids.forEach(boid => boid.move(1, this.bounds));
+    this.boids.forEach(boid => {
+      boid.flock(this.boids, this.bounds)
+      boid.move(this.bounds);
+    });
   }
 }
 
