@@ -25,6 +25,5 @@ export default class Boid {
     const newPosition = this.position.add(this.velocity);
     newPosition.clamp(new THREE.Vector3(), bounds);
   }
-
 }
 

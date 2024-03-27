@@ -1,8 +1,10 @@
+import Flock from "./Flock.js";
 import Renderer from "./Renderer.js";
 
 class Boids {
   constructor() {
-    this.renderer = new Renderer();
+    this.flock = new Flock();
+    this.renderer = new Renderer(this.flock)
   }
 
   init() {
@@ -16,6 +18,8 @@ class Boids {
   animate() {
     // Call the animate function recursively to keep the animation loop going.
     requestAnimationFrame(this.animate.bind(this));
+
+    this.flock.update();
 
     this.renderer.render();
   }
